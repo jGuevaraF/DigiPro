@@ -1,0 +1,6 @@
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\bin\Debug\ML.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\bin\Debug\ML.pdb
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\obj\Debug\ML.csproj.AssemblyReference.cache
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\obj\Debug\ML.csproj.CoreCompileInputs.cache
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\obj\Debug\ML.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\ML\obj\Debug\ML.pdb

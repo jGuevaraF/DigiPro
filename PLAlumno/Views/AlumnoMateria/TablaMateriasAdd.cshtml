@@ -1,0 +1,98 @@
+﻿@model ML.AlumnoMateria
+@{
+    ViewBag.Title = "TablaMateriasAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int contador = 1;
+    int idAlumno = (int)Session["IdAlumno"];
+    string nombre = (string)Session["Nombre"];
+    string apellidoPaterno = (string)Session["ApellidoPaterno"];
+    string apellidoMaterno = (string)Session["ApellidoMaterno"];
+}
+
+<h2 class="text-center">@nombre @apellidoPaterno @apellidoMaterno</h2>
+
+
+@if (Model.Materia.Materias != null && Model.Materia.Materias.Count > 0)
+{
+    <h3 class="text-center"><u>Materias donde el alumno se puede registrar</u></h3>
+    using (Html.BeginForm("TablaMateriasAdd", "AlumnoMateria", FormMethod.Post))
+    {
+        <div class="d-flex justify-content-center" style="width:auto;">
+            <table class="table" id="tablaMateria">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Nombre</td>
+                        <td>Costo</td>
+                        <td>Asignar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.AlumnoMateria materia in Model.Materia.Materias)
+                    {
+                        <tr>
+                            <td>@contador</td>
+                            <td>@materia.Materia.Nombre</td>
+                            <td class="costo">@materia.Materia.Costo</td>
+                            <td>
+                                <input class="form-check-input" name="idMaterias" type="checkbox" value="@materia.Materia.IdMateria">
+                            </td>
+                        </tr>
+                        contador++;
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="text-center">
+            <label class="text-danger m-3">Total: 0</label>
+        </div>
+
+        <div class="text-center">
+            <input type="submit" value="Asignar" class="btn btn-success" />
+        </div>
+
+    }
+}
+else
+{
+    <div class="alert alert-success text-center" role="alert">
+        El alumno tiene asignadas todas las materias
+    </div>
+
+}
+
+<div class="text-center m-3">
+    <a class="btn btn-danger" href="@Url.Action("GetAllAlumnoMateria", "AlumnoMateria")">Regresar</a>
+</div>
+
+<script>
+
+    let table = new DataTable('#tablaMateria', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var total = 0;
+        document.querySelectorAll("input[name='idMaterias']").forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                var costo = parseInt(this.closest('tr').querySelector('.costo').innerText);
+                if (this.checked) {
+                    total += costo;
+                } else {
+                    total -= costo;
+                }
+                document.querySelector(".text-danger").innerText = "Total: " + total;
+            });
+        });
+    });
+
+
+
+
+</script>

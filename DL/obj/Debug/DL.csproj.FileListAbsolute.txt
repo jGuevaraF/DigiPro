@@ -1,0 +1,12 @@
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\DL.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\DL.pdb
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\obj\Debug\DL.csproj.AssemblyReference.cache
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\obj\Debug\DL.csproj.CoreCompileInputs.cache
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\obj\Debug\DL.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\obj\Debug\DL.pdb
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\DL.dll.config
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\EntityFramework.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\EntityFramework.xml
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\digis\OneDrive\Documentos\Jorge Guevara Flores\JGuevaraDigiPro\DL\obj\Debug\DL.csproj.CopyComplete

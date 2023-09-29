@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ControlEscolarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AlumnoMateria">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdAlumno" Type="int" Nullable="false" />
+          <Property Name="IdMateria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK__AlumnoMat__IdAlu__1FCDBCEB">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="1" />
+          <End Role="AlumnoMateria" Type="Self.AlumnoMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="AlumnoMateria">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlumnoMat__IdMat__20C1E124">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="AlumnoMateria" Type="Self.AlumnoMateria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IdMateria" />
+            </Principal>
+            <Dependent Role="AlumnoMateria">
+              <PropertyRef Name="IdMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AlumnoMateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMateriasAsignadas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="MateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MateriaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="ControlEscolarModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlumnoMateria" EntityType="Self.AlumnoMateria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AlumnoMat__IdAlu__1FCDBCEB" Association="Self.FK__AlumnoMat__IdAlu__1FCDBCEB">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="AlumnoMateria" EntitySet="AlumnoMateria" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlumnoMat__IdMat__20C1E124" Association="Self.FK__AlumnoMat__IdMat__20C1E124">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="AlumnoMateria" EntitySet="AlumnoMateria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ControlEscolarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Alumnoes" Relationship="ControlEscolarModel.AlumnoMateria" FromRole="Materia" ToRole="Alumno" />
+        </EntityType>
+        <EntityContainer Name="ControlEscolarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materias" EntityType="Self.Materia" />
+          <FunctionImport Name="MateriaAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaGetAll" ReturnType="Collection(ControlEscolarModel.MateriaGetAll_Result)" />
+          <FunctionImport Name="MateriaGetById" ReturnType="Collection(ControlEscolarModel.MateriaGetById_Result)">
+          <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaDelete">
+          <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaUpdate">
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <EntitySet Name="Alumnoes" EntityType="ControlEscolarModel.Alumno" />
+          <AssociationSet Name="AlumnoMateria" Association="ControlEscolarModel.AlumnoMateria">
+            <End Role="Alumno" EntitySet="Alumnoes" />
+            <End Role="Materia" EntitySet="Materias" />
+          </AssociationSet>
+          <FunctionImport Name="AlumnoMateriaAdd">
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaGetAll" ReturnType="Collection(ControlEscolarModel.AlumnoMateriaGetAll_Result)">
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMateriasAsignadas" ReturnType="Collection(ControlEscolarModel.GetMateriasAsignadas_Result)">
+          <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaDelete">
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="MateriaGetAll_Result">
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="MateriaGetById_Result">
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Materias" Relationship="ControlEscolarModel.AlumnoMateria" FromRole="Alumno" ToRole="Materia" />
+        </EntityType>
+        <Association Name="AlumnoMateria">
+          <End Type="ControlEscolarModel.Alumno" Role="Alumno" Multiplicity="*" />
+          <End Type="ControlEscolarModel.Materia" Role="Materia" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="AlumnoMateriaGetAll_Result">
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="MateriaNombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetMateriasAsignadas_Result">
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ControlEscolarModelStoreContainer" CdmEntityContainer="ControlEscolarEntities">
+          <EntitySetMapping Name="Materias">
+            <EntityTypeMapping TypeName="ControlEscolarModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="MateriaAdd" FunctionName="ControlEscolarModel.Store.MateriaAdd" />
+          <FunctionImportMapping FunctionImportName="MateriaGetAll" FunctionName="ControlEscolarModel.Store.MateriaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlEscolarModel.MateriaGetAll_Result">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MateriaGetById" FunctionName="ControlEscolarModel.Store.MateriaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlEscolarModel.MateriaGetById_Result">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MateriaDelete" FunctionName="ControlEscolarModel.Store.MateriaDelete" />
+          <FunctionImportMapping FunctionImportName="MateriaUpdate" FunctionName="ControlEscolarModel.Store.MateriaUpdate" />
+          <EntitySetMapping Name="Alumnoes">
+            <EntityTypeMapping TypeName="ControlEscolarModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AlumnoMateria" TypeName="ControlEscolarModel.AlumnoMateria" StoreEntitySet="AlumnoMateria">
+            <EndProperty Name="Materia">
+              <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+            </EndProperty>
+            <EndProperty Name="Alumno">
+              <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaAdd" FunctionName="ControlEscolarModel.Store.AlumnoMateriaAdd" />
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaGetAll" FunctionName="ControlEscolarModel.Store.AlumnoMateriaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlEscolarModel.AlumnoMateriaGetAll_Result">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="MateriaNombre" ColumnName="MateriaNombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMateriasAsignadas" FunctionName="ControlEscolarModel.Store.GetMateriasAsignadas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlEscolarModel.GetMateriasAsignadas_Result">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaDelete" FunctionName="ControlEscolarModel.Store.AlumnoMateriaDelete" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,87 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-3">Agregar Alumno</h1>
+
+@using (Html.BeginForm("Form", "Alumno", FormMethod.Post, new { enctype = "multipart/form-data", @class = "container" }))
+{
+    @Html.HiddenFor(model => model.IdAlumno);
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="mb-2">
+            <label class="d-flex justify-content-center mb-2">
+                <i class="fa-solid fa-graduation-cap fa-xl" style="color: #000000;"></i> Nombre Alumno
+            </label>
+            <div class="d-flex justify-content-center mb-2">
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "nombre", @required = "true" })
+            </div>
+            <div id="nombreError" class="text-danger" style="display:none;">No se pueden ingresar números ni caracteres especiales, y no más de 3 palabras.</div>
+        </div>
+
+        <div class="mb-2">
+            <label class="d-flex justify-content-center mb-2">
+                <i class="fa-solid fa-signature fa-xl" style="color: #000000;"></i> Apellido Paterno
+            </label>
+            <div class="d-flex justify-content-center mb-2">
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "apellidoPaterno", @required = "true" })
+            </div>
+            <div id="apellidoPaternoError" class="text-danger" style="display:none;">No se pueden ingresar números ni caracteres especiales, y no más de 3 palabras.</div>
+        </div>
+
+        <div class="mb-2">
+            <label class="d-flex justify-content-center mb-2">
+                <i class="fa-solid fa-signature fa-xl" style="color: #000000;"></i> Apellido Materno
+            </label>
+            <div class="d-flex justify-content-center mb-2">
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "apellidoMaterno" })
+            </div>
+            <div id="apellidoMaternoError" class="text-danger" style="display:none;">No se pueden ingresar números ni caracteres especiales, y no más de 3 palabras.</div>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            <button type="submit" class="btn btn-success" id="botonGuardar">
+                <span><i class="fa-regular fa-floppy-disk fa-xl" style="color: #000000;"></i></span>
+                Guardar
+            </button>
+            <a href="@Url.Action("GetAll", "Alumno")" class="btn btn-secondary" id="btnRegresar">
+                <span><i class="fa-solid fa-rotate-left fa-xl" style="color: #000000;" id="iconoRegresar"></i></span>
+                Regresar
+            </a>
+        </div>
+    </div>
+
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+
+    $(document).ready(function () {
+        $('#nombre, #apellidoPaterno, #apellidoMaterno').on('input', function () {
+            var input = $(this);
+            var is_name = input.val();
+            var words = is_name.split(' ').filter(function (v) { return v !== '' });
+            if (is_name && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(is_name) && !(/\s{2,}/.test(is_name)) && words.length <= 3) {
+                input.removeClass("invalid").addClass("valid");
+                $('#' + this.id + 'Error').hide();
+            }
+            else {
+                input.val(is_name.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').replace(/\s{2,}/g, ' '));
+                if (words.length > 3) {
+                    input.val(words.slice(0, 3).join(' '));
+                }
+                input.removeClass("valid").addClass("invalid");
+                $('#' + this.id + 'Error').show();
+            }
+        });
+    });
+
+
+</script>

@@ -1,0 +1,66 @@
+﻿@model ML.AlumnoMateria
+@{
+    ViewBag.Title = "GetAllAlumnoMateria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int idAlumno = (int)Session["IdAlumno"];
+    string nombre = (string)Session["Nombre"];
+    string apellidoPaterno = (string)Session["ApellidoPaterno"];
+    string apellidoMaterno = (string)Session["ApellidoMaterno"];
+}
+
+<h1 class="text-center">Materias del Alumno</h1>
+<h3 class="text-center">@nombre @apellidoPaterno @apellidoMaterno</h3>
+<div class="text-center m-3">
+    <a class="btn btn-success" href="@Url.Action("TablaMateriasAdd", "AlumnoMateria")">Agregar</a>
+    <a class="btn btn-danger" href="@Url.Action("GetAll", "AlumnoMateria")">Regresar</a>
+</div>
+
+@if (Model.Materia.Materias != null && Model.Materia.Materias.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table" id="tablaMateria">
+            <thead class="table-info">
+                <tr class="text-center align-items-center">
+                    <th>Nombre</th>
+                    <th>Costo</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (ML.AlumnoMateria materia in Model.Materia.Materias)
+                {
+                    <tr class="text-center align-items-center">
+                        <td>@materia.Materia.Nombre</td>
+                        <td>$@materia.Materia.Costo</td>
+                        <td>
+                            <a class="btn btn-outline-secondary m-1" href="@Url.Action("Delete", "AlumnoMateria", new {idMateria=materia.Materia.IdMateria})"
+                               onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
+                                <i class="fa-sharp fa-solid fa-trash fa-lg" style="color: #dc3545;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger text-center" role="alert">
+        No tiene materias!.
+    </div>
+
+}
+
+<script>
+    let table = new DataTable('#tablaMateria', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+</script>

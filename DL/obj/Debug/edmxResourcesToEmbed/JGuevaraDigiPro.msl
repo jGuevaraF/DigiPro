@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ControlEscolarModelStoreContainer" CdmEntityContainer="ControlEscolarEntities">
+    <EntitySetMapping Name="Materias">
+      <EntityTypeMapping TypeName="ControlEscolarModel.Materia">
+        <MappingFragment StoreEntitySet="Materia">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="MateriaAdd" FunctionName="ControlEscolarModel.Store.MateriaAdd" />
+    <FunctionImportMapping FunctionImportName="MateriaGetAll" FunctionName="ControlEscolarModel.Store.MateriaGetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ControlEscolarModel.MateriaGetAll_Result">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MateriaGetById" FunctionName="ControlEscolarModel.Store.MateriaGetById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ControlEscolarModel.MateriaGetById_Result">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MateriaDelete" FunctionName="ControlEscolarModel.Store.MateriaDelete" />
+    <FunctionImportMapping FunctionImportName="MateriaUpdate" FunctionName="ControlEscolarModel.Store.MateriaUpdate" />
+    <EntitySetMapping Name="Alumnoes">
+      <EntityTypeMapping TypeName="ControlEscolarModel.Alumno">
+        <MappingFragment StoreEntitySet="Alumno">
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AlumnoMateria" TypeName="ControlEscolarModel.AlumnoMateria" StoreEntitySet="AlumnoMateria">
+      <EndProperty Name="Materia">
+        <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+      </EndProperty>
+      <EndProperty Name="Alumno">
+        <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="AlumnoMateriaAdd" FunctionName="ControlEscolarModel.Store.AlumnoMateriaAdd" />
+    <FunctionImportMapping FunctionImportName="AlumnoMateriaGetAll" FunctionName="ControlEscolarModel.Store.AlumnoMateriaGetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ControlEscolarModel.AlumnoMateriaGetAll_Result">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="MateriaNombre" ColumnName="MateriaNombre" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMateriasAsignadas" FunctionName="ControlEscolarModel.Store.GetMateriasAsignadas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ControlEscolarModel.GetMateriasAsignadas_Result">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AlumnoMateriaDelete" FunctionName="ControlEscolarModel.Store.AlumnoMateriaDelete" />
+  </EntityContainerMapping>
+</Mapping>

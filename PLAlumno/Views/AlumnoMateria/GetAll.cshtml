@@ -1,0 +1,66 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Alumnos</h1>
+<div id="contenido">
+
+    @if (Model.Alumnos != null)
+    {
+        <div class="table-responsive">
+            <table class="table" id="getAll">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Asignar Materia</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-center">
+                    @foreach (ML.Alumno alumno in Model.Alumnos)
+                    {
+                        <tr class="align-middle">
+                            <td>@alumno.Nombre</td>
+                            <td>@alumno.ApellidoPaterno</td>
+                            <td>@alumno.ApellidoMaterno</td>
+                            <td>
+                                <a class="btn btn-outline-secondary m-1" onclick="asignarMaterias(@alumno.IdAlumno, '@alumno.Nombre', '@alumno.ApellidoPaterno', '@alumno.ApellidoMaterno')"><i class="fa-solid fa-circle-plus fa-xl" style="color: #080808;"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+    }
+    else
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            No hay alumnos
+        </div>
+
+    }
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    
+    function asignarMaterias(idAlumno, nombre, apellidoPaterno, apellidoMaterno) {
+        window.location.href = '/AlumnoMateria/GetAllAlumnoMateria?idAlumno=' + idAlumno + '&nombre=' + nombre + '&apellidoPaterno=' + apellidoPaterno + '&apellidoMaterno=' + apellidoMaterno;
+    }
+
+    let table = new DataTable('#getAll', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+
+</script>
